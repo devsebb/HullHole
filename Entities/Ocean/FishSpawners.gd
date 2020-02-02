@@ -9,8 +9,8 @@ onready var spawner5 = $Spawner5
 
 var rng = RandomNumberGenerator.new()
 
-var threshold = 250
-var timer = 250
+var threshold = 175
+var timer = 175
 
 func _ready():
 	rng.randomize()

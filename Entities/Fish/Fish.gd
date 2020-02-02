@@ -5,6 +5,7 @@ extends KinematicBody2D
 
 onready var ship = get_node("/root/World/Ship")
 onready var hole = preload("res://Entities/Hole/Hole.tscn")
+onready var biteSound = $Bite
 
 #var positionInArea = Vector2(0, 0)
 
@@ -25,16 +26,16 @@ func _ready():
 	var pos = rng.randi_range(1, 5)	
 	
 	if(pos == 1):
-		dest = Vector2(19, 275)
+		dest = Vector2(-18, 360)
 	elif(pos == 2):
-		dest = Vector2(-260, 250)
+		dest = Vector2(-260, 350)
 	elif(pos == 3):
-		dest = Vector2(430, 300)
+		dest = Vector2(300, 390)
 	elif(pos == 4):
-		dest = Vector2(-35, 470)
+		dest = Vector2(110, 410)
 	elif(pos == 5):
-		dest = Vector2(-25, 450)
-		
+		dest = Vector2(-150, 350)
+
 	dest += Vector2(rng.randi_range(-100, 100), rng.randi_range(-100, 100))
 	#	var centerpos = Vector2(0,0)#targetShape.position #+ targetArea.position
 
@@ -55,7 +56,7 @@ func _physics_process(delta):
 
 	if abs(self.global_position.x - dest.x) < 50 and abs(self.global_position.y - dest.y) < 50:
 		if destType == 1 and time_to_bite <= 0:
-			dest = Vector2(rng.randi_range(-1000, 1000), rng.randi_range(700, 1000))
+			dest = Vector2(rng.randi_range(-1000, 1000), rng.randi_range(1000, 2000))
 			flip_time = 0
 			destType = 2
 		elif destType == 2:
@@ -72,6 +73,8 @@ func manage_biting():
 		time_to_bite -= 1
 
 func bite():
+	biteSound.play()
 	var child = hole.instance()
 	child.global_position = self.global_position
+	child.global_position.y -= 200
 	ship.add_child(child)
