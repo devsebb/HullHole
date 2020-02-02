@@ -31,7 +31,7 @@ func _physics_process(_delta):
 		elif chosen_spawner == 5:
 			spawner5.add_child(fish.instance())
 
-		if threshold > 15:
+		if threshold > 75:
 			threshold -= 5
 			
 		timer = threshold

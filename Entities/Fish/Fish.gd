@@ -3,6 +3,9 @@ extends KinematicBody2D
 #onready var targetArea = get_node("/root/Ship/FishAreaContainer")
 #onready var targetShape = get_node("/root/Ship/FishAreaContainer/FishArea")
 
+onready var ship = get_node("/root/World/Ship")
+onready var hole = preload("res://Entities/Hole/Hole.tscn")
+
 #var positionInArea = Vector2(0, 0)
 
 onready var sprite = $AnimatedSprite
@@ -13,6 +16,8 @@ var dest = Vector2(0, 0)
 var destType = 1
 
 var time_to_bite = 60
+var bite_activated = false
+
 var flip_time = 60
 
 func _ready():
@@ -49,9 +54,24 @@ func _physics_process(delta):
 		flip_time = rng.randi_range(20, 60)
 
 	if abs(self.global_position.x - dest.x) < 50 and abs(self.global_position.y - dest.y) < 50:
-		if destType == 1:
+		if destType == 1 and time_to_bite <= 0:
 			dest = Vector2(rng.randi_range(-1000, 1000), rng.randi_range(700, 1000))
 			flip_time = 0
 			destType = 2
 		elif destType == 2:
 			get_parent().remove_child(self)
+
+	if bite_activated:
+		manage_biting()
+
+func manage_biting():
+	if time_to_bite == 0:
+		bite()
+		time_to_bite -= 1
+	else:
+		time_to_bite -= 1
+
+func bite():
+	var child = hole.instance()
+	child.global_position = self.global_position
+	ship.add_child(child)
