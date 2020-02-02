@@ -33,6 +33,8 @@ func handle_input(_delta):
 	if Input.is_action_pressed("player_down"):
 		if is_on_floor():
 			input_vec += Vector2(0, 1)
+	if Input.is_action_pressed("player_patch_hole"):
+		if 
 
 func handle_movement(_delta):
 	if !is_on_floor():
