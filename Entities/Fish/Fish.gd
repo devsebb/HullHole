@@ -20,6 +20,7 @@ var time_to_bite = 60
 var bite_activated = false
 
 var flip_time = 60
+var original_y = 0
 
 func _ready():
 	rng.randomize()
@@ -37,6 +38,7 @@ func _ready():
 		dest = Vector2(-150, 350)
 
 	dest += Vector2(rng.randi_range(-100, 100), rng.randi_range(-100, 100))
+	original_y = dest.y
 	#	var centerpos = Vector2(0,0)#targetShape.position #+ targetArea.position
 
 #	var size = targetArea.shape.extents
@@ -46,6 +48,9 @@ func _ready():
 
 func _physics_process(delta):
 	#var vector = (positionInArea - self.global_position).normalized()
+	if destType == 1:
+		dest.y = original_y + ship.position_diff_calc
+
 	var diffVec = Vector2(dest.x + rng.randi_range(-250, 250), dest.y + rng.randi_range(-250, 250))
 	move_and_slide(diffVec - self.global_position)
 	
@@ -56,7 +61,8 @@ func _physics_process(delta):
 
 	if abs(self.global_position.x - dest.x) < 50 and abs(self.global_position.y - dest.y) < 50:
 		if destType == 1 and time_to_bite <= 0:
-			dest = Vector2(rng.randi_range(-1000, 1000), rng.randi_range(1000, 2000))
+			dest = Vector2(rng.randi_range(-1000, 1000 + ship.position_diff_calc), 
+							rng.randi_range(1000, 2000 + ship.position_diff_calc))
 			flip_time = 0
 			destType = 2
 		elif destType == 2:
@@ -76,5 +82,5 @@ func bite():
 	biteSound.play()
 	var child = hole.instance()
 	child.global_position = self.global_position
-	child.global_position.y -= 200
+	child.global_position.y -= (200 + ship.position_diff_calc)
 	ship.add_child(child)

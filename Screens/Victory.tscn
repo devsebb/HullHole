@@ -1,0 +1,69 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Screens/Victory.gd" type="Script" id=1]
+[ext_resource path="res://Entities/Player/frame3.png" type="Texture" id=2]
+[ext_resource path="res://Entities/Player/frame2.png" type="Texture" id=3]
+[ext_resource path="res://Entities/Player/frame1.png" type="Texture" id=4]
+[ext_resource path="res://Entities/Player/frame4.png" type="Texture" id=5]
+[ext_resource path="res://Entities/Ship/ocean_front.png" type="Texture" id=6]
+[ext_resource path="res://frame1.png" type="Texture" id=7]
+[ext_resource path="res://Entities/Ship/frame2.png" type="Texture" id=8]
+[ext_resource path="res://Entities/Ship/frame1.png" type="Texture" id=9]
+[ext_resource path="res://Entities/Ship/frame3.png" type="Texture" id=10]
+[ext_resource path="res://Screens/victory_animation.gd" type="Script" id=11]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = 436.0
+margin_top = 214.0
+margin_right = 1007.0
+margin_bottom = 250.0
+text = "You win! Press Z to restart!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="frame1" type="Sprite" parent="."]
+position = Vector2( -481.868, 180.687 )
+scale = Vector2( 3, 3 )
+z_index = -1000
+texture = ExtResource( 7 )
+offset = Vector2( 287.704, 24.6483 )
+
+[node name="frame2" type="Sprite" parent="."]
+position = Vector2( -675.641, -132.782 )
+scale = Vector2( 3, 3 )
+z_index = -10
+texture = ExtResource( 8 )
+script = ExtResource( 11 )
+
+[node name="frame3" type="Sprite" parent="frame2"]
+position = Vector2( -1.75816, -3.51617 )
+scale = Vector2( 1, 1 )
+z_index = -1
+texture = ExtResource( 9 )
+
+[node name="frame4" type="Sprite" parent="frame2"]
+position = Vector2( -0.0915527, 0.747295 )
+texture = ExtResource( 10 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="frame2"]
+position = Vector2( 119.051, 130.088 )
+z_index = -1
+frames = SubResource( 1 )
+frame = 2
+playing = true
+
+[node name="ocean_front" type="Sprite" parent="frame2"]
+position = Vector2( 21.2853, 375.429 )
+texture = ExtResource( 6 )

@@ -1,0 +1,159 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Screens/Defeat.gd" type="Script" id=1]
+[ext_resource path="res://Entities/Ship/ocean_front.png" type="Texture" id=2]
+[ext_resource path="res://Entities/Player/frame3.png" type="Texture" id=3]
+[ext_resource path="res://Entities/Player/frame2.png" type="Texture" id=4]
+[ext_resource path="res://Entities/Player/frame1.png" type="Texture" id=5]
+[ext_resource path="res://Entities/Player/frame4.png" type="Texture" id=6]
+[ext_resource path="res://Entities/Fish/frame2.png" type="Texture" id=7]
+[ext_resource path="res://Entities/Fish/frame1.png" type="Texture" id=8]
+[ext_resource path="res://Entities/Ship/frame2.png" type="Texture" id=9]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 1.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 8 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="ParticlesMaterial" id=3]
+flag_disable_z = true
+spread = 180.0
+flatness = 0.84
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 10.0
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 1, 0, 0, 1 )
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = 411.202
+margin_top = 284.908
+margin_right = 659.202
+margin_bottom = 324.908
+text = "You lose! Press Z to restart!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ocean_front" type="Sprite" parent="."]
+position = Vector2( 437.282, 433.762 )
+scale = Vector2( 10, 10 )
+z_index = -4096
+texture = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 495.494, 177.904 )
+rotation = 4.71239
+scale = Vector2( 3, 3 )
+frames = SubResource( 1 )
+frame = 3
+playing = true
+
+[node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
+position = Vector2( 356.47, 144.055 )
+rotation = 0.261799
+scale = Vector2( 3, 3 )
+frames = SubResource( 2 )
+frame = 1
+playing = true
+
+[node name="AnimatedSprite3" type="AnimatedSprite" parent="."]
+position = Vector2( 377.556, 181.615 )
+scale = Vector2( 8, 8 )
+frames = SubResource( 2 )
+frame = 1
+playing = true
+
+[node name="Particles2D" type="Particles2D" parent="AnimatedSprite3"]
+position = Vector2( 2.50583, -0.494724 )
+process_material = SubResource( 3 )
+
+[node name="AnimatedSprite11" type="AnimatedSprite" parent="."]
+position = Vector2( 317.036, 265.176 )
+rotation = -0.261799
+scale = Vector2( 3, 3 )
+frames = SubResource( 2 )
+frame = 1
+playing = true
+
+[node name="AnimatedSprite12" type="AnimatedSprite" parent="."]
+position = Vector2( 286.242, 120.168 )
+rotation = 0.139626
+scale = Vector2( 3, 3 )
+frames = SubResource( 2 )
+playing = true
+
+[node name="AnimatedSprite4" type="AnimatedSprite" parent="."]
+position = Vector2( 591.716, 240.02 )
+rotation = 0.418879
+scale = Vector2( 3, 3 )
+frames = SubResource( 2 )
+frame = 1
+playing = true
+flip_h = true
+
+[node name="AnimatedSprite5" type="AnimatedSprite" parent="."]
+position = Vector2( 593.378, 174.734 )
+scale = Vector2( 3, 3 )
+frames = SubResource( 2 )
+frame = 1
+playing = true
+flip_h = true
+
+[node name="AnimatedSprite9" type="AnimatedSprite" parent="."]
+position = Vector2( 673.914, 132.979 )
+scale = Vector2( 3, 3 )
+frames = SubResource( 2 )
+playing = true
+flip_h = true
+
+[node name="AnimatedSprite10" type="AnimatedSprite" parent="."]
+position = Vector2( 666.816, 245.572 )
+rotation = 0.523599
+scale = Vector2( 3, 3 )
+frames = SubResource( 2 )
+playing = true
+flip_h = true
+
+[node name="AnimatedSprite6" type="AnimatedSprite" parent="."]
+position = Vector2( 491.454, 112.799 )
+rotation = 1.5708
+scale = Vector2( 3, 3 )
+frames = SubResource( 2 )
+playing = true
+
+[node name="AnimatedSprite7" type="AnimatedSprite" parent="."]
+position = Vector2( 413.892, 77.3419 )
+rotation = 1.25664
+scale = Vector2( 3, 3 )
+frames = SubResource( 2 )
+frame = 1
+playing = true
+
+[node name="AnimatedSprite8" type="AnimatedSprite" parent="."]
+position = Vector2( 585.637, 67.3695 )
+rotation = 1.78024
+scale = Vector2( 3, 3 )
+frames = SubResource( 2 )
+frame = 1
+playing = true
+
+[node name="frame2" type="Sprite" parent="."]
+position = Vector2( 52.577, 1072.11 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 9 )

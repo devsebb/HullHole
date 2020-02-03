@@ -9,9 +9,11 @@ onready var repair_collider = $RepairCollide
 
 onready var wheel = preload("res://Entities/Ship/Wheel.tscn")
 onready var distance_bar = $UI/Sprite
+onready var world = get_node("/root/World")
+onready var victory_screen = preload("res://Screens/Victory.tscn")
 
 var drive_distance = 0.0
-var drive_goal = 10000.0
+var drive_goal = 3100.0
 
 func _physics_process(delta):
 	handle_movement(delta)
@@ -26,6 +28,13 @@ func _physics_process(delta):
 	else:
 		veloc.y += input_vec.y
 
+	if drive_distance / drive_goal >= 1:
+		for n in world.get_children():
+			world.remove_child(n)
+			n.queue_free()
+			
+		world.add_child(victory_screen.instance())
+		
 	move_and_slide(veloc , Vector2(0, -1))
 
 func handle_input(_delta):
@@ -44,8 +53,6 @@ func handle_input(_delta):
 		if is_on_floor():
 			input_vec += Vector2(0, 1)
 	if Input.is_action_pressed("player_patch_hole"):
-		print(repair_collider.holes)
-		
 		for elem in repair_collider.holes:
 			if elem.get_filename() == wheel.get_path():
 				drive()
@@ -58,7 +65,7 @@ func handle_movement(_delta):
 	else:
 		veloc.y = 0
 
-	if self.global_position.y >= 250:
+	if self.global_position.y >= (250 + ship.position_diff_calc):
 		ship.trigger_transparent_transition(true)
 	else:
 		ship.trigger_transparent_transition(false)
