@@ -5,7 +5,7 @@
 [ext_resource path="res://Entities/Player/frame3.png" type="Texture" id=3]
 [ext_resource path="res://Entities/Player/frame4.png" type="Texture" id=4]
 [ext_resource path="res://Entities/Player/Player.gd" type="Script" id=5]
-[ext_resource path="res://icon.png" type="Texture" id=6]
+[ext_resource path="res://progress.jpg" type="Texture" id=6]
 [ext_resource path="res://Entities/Player/RepairCollide.gd" type="Script" id=7]
 
 [sub_resource type="SpriteFrames" id=1]
@@ -28,6 +28,7 @@ script = ExtResource( 5 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 3, 3 )
 frames = SubResource( 1 )
+frame = 3
 playing = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -48,8 +49,8 @@ shape = SubResource( 3 )
 [node name="UI" type="Node2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="UI"]
-position = Vector2( -1038.96, -287.004 )
-scale = Vector2( 16.4157, 0.49293 )
+position = Vector2( -5.79023, -331.135 )
+scale = Vector2( 1.72975, 0.288388 )
 texture = ExtResource( 6 )
 [connection signal="body_entered" from="RepairCollide" to="RepairCollide" method="_on_RepairCollide_body_entered"]
 [connection signal="body_exited" from="RepairCollide" to="RepairCollide" method="_on_RepairCollide_body_exited"]
